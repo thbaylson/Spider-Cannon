@@ -9,14 +9,14 @@ public class SpiderLauncher : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]public CinemachineVirtualCamera followCam;
     [SerializeField] private float followCamZoomOutPOV;
-    [SerializeField] private Collider colliderToTurnOff; // after launch, we wanna turn off the box collider.
+    [SerializeField] private BoxCollider colliderToTurnOff; // after launch, we wanna turn off the box collider.
     [SerializeField] private Rigidbody[] ragdollRbs;
     [SerializeField] private Collider[] ragdollColliders;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        colliderToTurnOff = GetComponent<Collider>();
+        colliderToTurnOff = gameObject.GetComponent<BoxCollider>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
         followCam = followCam.GetComponent<CinemachineVirtualCamera>();
