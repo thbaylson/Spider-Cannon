@@ -8,6 +8,7 @@ public class DistanceTracker : MonoBehaviour
 
     // We need a stop delay or else we will end the run on the first frame after we start tracking.
     [SerializeField] private float StopDelay = 1f;
+    [SerializeField] public float originalFollowCamFOV;
     private float stoppingTimer = 0f;
 
     private Rigidbody rb;
@@ -17,8 +18,12 @@ public class DistanceTracker : MonoBehaviour
     public event Action<float> OnDistanceChanged;
     public event Action<float> OnRunEnded;
 
+    private SpiderLauncher _spiderLauncher;
+    
+
     private void Awake()
     {
+        _spiderLauncher = GetComponent<SpiderLauncher>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -30,6 +35,7 @@ public class DistanceTracker : MonoBehaviour
         OnDistanceChanged?.Invoke(DistanceTraveled);
         if (rb.velocity.magnitude < StopSpeed)
         {
+            _spiderLauncher.followCam.m_Lens.FieldOfView = originalFollowCamFOV;
             stoppingTimer += Time.deltaTime;
             if (stoppingTimer >= StopDelay)
             {

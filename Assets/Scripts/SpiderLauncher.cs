@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class SpiderLauncher : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class SpiderLauncher : MonoBehaviour
     public bool launched = false;
 
     private Rigidbody rb;
+    [SerializeField]public CinemachineVirtualCamera followCam;
+    [SerializeField] private float followCamZoomOutPOV;
     [SerializeField] private Collider colliderToTurnOff; // after launch, we wanna turn off the box collider.
     [SerializeField] private Rigidbody[] ragdollRbs;
     [SerializeField] private Collider[] ragdollColliders;
@@ -16,6 +19,7 @@ public class SpiderLauncher : MonoBehaviour
         colliderToTurnOff = GetComponent<Collider>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
+        followCam = followCam.GetComponent<CinemachineVirtualCamera>();
     }
 
     void Update()
@@ -37,6 +41,7 @@ public class SpiderLauncher : MonoBehaviour
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
         colliderToTurnOff.enabled = false;
         TurnOnRagdoll();
+        followCam.m_Lens.FieldOfView = followCamZoomOutPOV;
         GetComponent<DistanceTracker>()?.StartTracking();
     }
 

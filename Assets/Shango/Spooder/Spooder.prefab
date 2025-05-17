@@ -3678,6 +3678,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchAngle: 45
   launched: 0
+  followCam: {fileID: 0}
+  followCamZoomOutPOV: 0
+  colliderToTurnOff: {fileID: 0}
   ragdollRbs: []
   ragdollColliders: []
 --- !u!114 &6320363932056749318
@@ -3713,6 +3716,7 @@ MonoBehaviour:
   StopSpeed: 0.25
   DistanceTraveled: 0
   StopDelay: 0.5
+  originalFollowCamFOV: 0
 --- !u!1 &9070014777536328049
 GameObject:
   m_ObjectHideFlags: 0
