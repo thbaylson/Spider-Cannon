@@ -215,7 +215,7 @@ Rigidbody:
   m_GameObject: {fileID: 1164287380790959169}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -339,7 +339,7 @@ Rigidbody:
   m_GameObject: {fileID: 1422894708954211276}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -463,7 +463,7 @@ Rigidbody:
   m_GameObject: {fileID: 1970281448604531330}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -619,7 +619,7 @@ Rigidbody:
   m_GameObject: {fileID: 2668623726109096712}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -805,7 +805,7 @@ Rigidbody:
   m_GameObject: {fileID: 3284721681680700968}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -993,7 +993,7 @@ Rigidbody:
   m_GameObject: {fileID: 3754420964160314223}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1179,7 +1179,7 @@ Rigidbody:
   m_GameObject: {fileID: 3993140384688062316}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1303,7 +1303,7 @@ Rigidbody:
   m_GameObject: {fileID: 4085194356449827813}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1427,7 +1427,7 @@ Rigidbody:
   m_GameObject: {fileID: 4199231758204337617}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1703,7 +1703,7 @@ Rigidbody:
   m_GameObject: {fileID: 5337704259935470152}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1827,7 +1827,7 @@ Rigidbody:
   m_GameObject: {fileID: 5491789371929993144}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1951,7 +1951,7 @@ Rigidbody:
   m_GameObject: {fileID: 5814870922045612532}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2075,7 +2075,7 @@ Rigidbody:
   m_GameObject: {fileID: 5880312779684441375}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2199,7 +2199,7 @@ Rigidbody:
   m_GameObject: {fileID: 5914005940382836707}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2323,7 +2323,7 @@ Rigidbody:
   m_GameObject: {fileID: 5956199846042850896}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2447,7 +2447,7 @@ Rigidbody:
   m_GameObject: {fileID: 6694380972080866952}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2602,7 +2602,7 @@ Rigidbody:
   m_GameObject: {fileID: 6784237593215881684}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2726,7 +2726,7 @@ Rigidbody:
   m_GameObject: {fileID: 6872582924396234280}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2935,7 +2935,7 @@ Rigidbody:
   m_GameObject: {fileID: 7314551945263981783}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3059,7 +3059,7 @@ Rigidbody:
   m_GameObject: {fileID: 7406420460525349974}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3183,7 +3183,7 @@ Rigidbody:
   m_GameObject: {fileID: 7414800771756117704}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3315,7 +3315,7 @@ Rigidbody:
   m_GameObject: {fileID: 7665592404344210440}
   serializedVersion: 4
   m_Mass: 5
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3439,7 +3439,7 @@ Rigidbody:
   m_GameObject: {fileID: 8028141461323760873}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3563,7 +3563,7 @@ Rigidbody:
   m_GameObject: {fileID: 8214530432726628675}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -3775,8 +3775,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchAngle: 45
   launched: 0
-  followCam: {fileID: 0}
-  followCamZoomOutPOV: 110
   colliderToTurnOff: {fileID: 4197375758062694729}
   ragdollRbs: []
   ragdollColliders: []
@@ -3831,7 +3829,10 @@ MonoBehaviour:
   StopSpeed: 1
   DistanceTraveled: 0
   StopDelay: 2
+  CoroutineTimer: 0.1
+  followCam: {fileID: 0}
   originalFollowCamFOV: 60
+  followCamZoomOutPOV: 0
 --- !u!1 &9070014777536328049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,7 +3900,7 @@ Rigidbody:
   m_GameObject: {fileID: 9070014777536328049}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

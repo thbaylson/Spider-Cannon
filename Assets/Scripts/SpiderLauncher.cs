@@ -42,6 +42,7 @@ public class SpiderLauncher : MonoBehaviour
         // Calculate the force vector.
         float radians = launchAngle * Mathf.Deg2Rad;
         Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
+        rb.isKinematic = false;
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
 
         // Ragdoll.
