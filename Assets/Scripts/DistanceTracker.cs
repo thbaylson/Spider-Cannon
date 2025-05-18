@@ -1,4 +1,6 @@
+using Cinemachine;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class DistanceTracker : MonoBehaviour
@@ -8,8 +10,12 @@ public class DistanceTracker : MonoBehaviour
 
     // We need a stop delay or else we will end the run on the first frame after we start tracking.
     [SerializeField] private float StopDelay = 1f;
-    [SerializeField] public float originalFollowCamFOV;
+    [SerializeField] private float CoroutineTimer = 0.1f;
     private float stoppingTimer = 0f;
+
+    [SerializeField] public CinemachineVirtualCamera followCam;
+    [SerializeField] public float originalFollowCamFOV;
+    [SerializeField] private float followCamZoomOutPOV;
 
     private Rigidbody rb;
     private float startX;
@@ -18,30 +24,41 @@ public class DistanceTracker : MonoBehaviour
     public event Action<float> OnDistanceChanged;
     public event Action<float> OnRunEnded;
 
-    private SpiderLauncher _spiderLauncher;
-    
+    private SpiderLauncher _spiderLauncher;    
 
     private void Awake()
     {
         _spiderLauncher = GetComponent<SpiderLauncher>();
+        _spiderLauncher.OnLaunched += StartTracking;
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private IEnumerator Track()
     {
-        if (!isTracking) return;
+        // Small buffer to make sure we're moving before we check velocity.
+        yield return new WaitForSeconds(0.1f);
 
-        DistanceTraveled = transform.position.x - startX;
-        OnDistanceChanged?.Invoke(DistanceTraveled);
-        if (rb.velocity.magnitude < StopSpeed)
+        while (isTracking)
         {
-            _spiderLauncher.followCam.m_Lens.FieldOfView = originalFollowCamFOV;
-            stoppingTimer += Time.deltaTime;
-            if (stoppingTimer >= StopDelay)
+            DistanceTraveled = transform.position.x - startX;
+            OnDistanceChanged?.Invoke(DistanceTraveled);
+
+            if (rb.velocity.magnitude < StopSpeed)
             {
-                isTracking = false;
-                OnRunEnded?.Invoke(DistanceTraveled);
+                // Once we start stopping, we want to stop the player from moving.
+                // Except this doesn't actually work the way I thought it would...
+                rb.velocity = Vector3.zero;
+
+                followCam.m_Lens.FieldOfView = originalFollowCamFOV;
+                stoppingTimer += CoroutineTimer + Time.deltaTime;
+                if (stoppingTimer >= StopDelay)
+                {
+                    isTracking = false;
+                    OnRunEnded?.Invoke(DistanceTraveled);
+                }
             }
+
+            yield return new WaitForSeconds(CoroutineTimer);
         }
     }
 
@@ -49,5 +66,8 @@ public class DistanceTracker : MonoBehaviour
     {
         startX = transform.position.x;
         isTracking = true;
+        followCam.m_Lens.FieldOfView = followCamZoomOutPOV;
+
+        StartCoroutine(Track());
     }
 }

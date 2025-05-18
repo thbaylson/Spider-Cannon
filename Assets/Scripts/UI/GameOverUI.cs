@@ -17,7 +17,7 @@ public class GameOverUI : MonoBehaviour
 
     private void Show(float distance)
     {
-        gameOverText.text = $"GAME OVER\nDistance Traveled: {Math.Round(distance, 1)}m!";
+        gameOverText.text = $"GAME OVER\nDistance Traveled: {Math.Round(distance, 1)}cm!";
         gameOverPanel.SetActive(true);
         // TODO: PlayerPerfs to track best?
     }

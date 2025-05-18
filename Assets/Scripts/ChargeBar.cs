@@ -5,10 +5,11 @@ public class ChargeBar : MonoBehaviour
 {
     [SerializeField] private Image chargeBar;
     [SerializeField] private GameObject chargeBarParent;
-    [SerializeField] private float maxCharge = 100f;
     public float CurrentCharge { get; private set; }
+    
     public float minForce = 5f;
     public float maxForce = 20f;
+    private float maxCharge = 100f;
     public float chargeRate = 10f;
 
     private SpiderLauncher spiderLauncher;
@@ -16,6 +17,7 @@ public class ChargeBar : MonoBehaviour
     void Awake()
     {
         spiderLauncher = GetComponent<SpiderLauncher>();
+        spiderLauncher.OnLaunched += HideUI;
     }
 
     void Start()
@@ -31,11 +33,6 @@ public class ChargeBar : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetUI();
-        }
-
         if (spiderLauncher.launched) return;
 
         // While the launch key is held down, charge the bar.
@@ -50,11 +47,15 @@ public class ChargeBar : MonoBehaviour
         {
             float launchForce = Mathf.Lerp(minForce, maxForce, CurrentCharge / maxCharge);
             spiderLauncher.Launch(launchForce);
-            chargeBarParent.SetActive(false);
         }
     }
 
-    public void ResetUI()
+    public void HideUI()
+    {
+        chargeBarParent.SetActive(false);
+    }
+
+    public void ShowUI()
     {
         CurrentCharge = 0f;
         UpdateChargeBar();

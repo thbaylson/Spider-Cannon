@@ -1,17 +1,19 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class SpiderLauncher : MonoBehaviour
 {
-    public float launchAngle = 45f;
+    public float launchAngle = 0f;
     public bool launched = false;
 
     private Rigidbody rb;
-    [SerializeField]public CinemachineVirtualCamera followCam;
-    [SerializeField] private float followCamZoomOutPOV;
     [SerializeField] private BoxCollider colliderToTurnOff; // after launch, we wanna turn off the box collider.
     [SerializeField] private Rigidbody[] ragdollRbs;
     [SerializeField] private Collider[] ragdollColliders;
+
+    public event Action OnLaunched;
 
     void Start()
     {
@@ -19,14 +21,13 @@ public class SpiderLauncher : MonoBehaviour
         colliderToTurnOff = gameObject.GetComponent<BoxCollider>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
-        followCam = followCam.GetComponent<CinemachineVirtualCamera>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            ResetPosition();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -35,23 +36,16 @@ public class SpiderLauncher : MonoBehaviour
         if (launched) return;
         launched = true;
 
+        // Invoke subscriber event.
+        OnLaunched?.Invoke();
+
+        // Calculate the force vector.
         float radians = launchAngle * Mathf.Deg2Rad;
         Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
-
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
-        colliderToTurnOff.enabled = false;
-        TurnOnRagdoll();
-        followCam.m_Lens.FieldOfView = followCamZoomOutPOV;
-        GetComponent<DistanceTracker>()?.StartTracking();
-    }
 
-    public void ResetPosition()
-    {
-        launched = false;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        transform.position = new Vector3(0, 0, 0);
-        transform.rotation = Quaternion.identity;
+        // Ragdoll.
+        TurnOnRagdoll();
     }
 
     private void TurnOnRagdoll()
