@@ -14,6 +14,9 @@ public class SpiderLauncher : MonoBehaviour
     private ChargeBar chargeBar;
     private AngleArrow angleArrow;
 
+    public AudioClip yeetClip;
+    public float yeetPitch;
+    public AudioSource audioSource;
     public event Action OnLaunched;
 
     private void Awake()
@@ -30,6 +33,8 @@ public class SpiderLauncher : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
+        audioSource = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();
+        
     }
 
     void Update()
@@ -69,13 +74,13 @@ public class SpiderLauncher : MonoBehaviour
 
         // Invoke subscriber event.
         OnLaunched?.Invoke();
-
+        
         // Calculate the force vector.
         float radians = launchAngle * Mathf.Deg2Rad;
         Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
         rb.isKinematic = false;
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
-
+        YeetUponLaunch();
         // Ragdoll.
         TurnOnRagdoll();
     }
@@ -91,5 +96,10 @@ public class SpiderLauncher : MonoBehaviour
         {
             col.enabled = true;
         }
+    }
+    public void YeetUponLaunch()
+    {
+        audioSource.pitch = yeetPitch;
+        audioSource.PlayOneShot(yeetClip, 1);
     }
 }

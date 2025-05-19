@@ -15,6 +15,8 @@ public class DistanceTracker : MonoBehaviour
 
     [SerializeField] public CinemachineVirtualCamera followCam;
     [SerializeField] public float originalFollowCamFOV;
+    [SerializeField] public float originalCamDistance;
+    [SerializeField] private float zoomedOutCamDistance;
     [SerializeField] private float followCamZoomOutPOV;
 
     private Rigidbody rb;
@@ -36,7 +38,7 @@ public class DistanceTracker : MonoBehaviour
     private IEnumerator Track()
     {
         // Small buffer to make sure we're moving before we check velocity.
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(.1f);
 
         while (isTracking)
         {
@@ -50,6 +52,7 @@ public class DistanceTracker : MonoBehaviour
                 rb.velocity = Vector3.zero;
 
                 followCam.m_Lens.FieldOfView = originalFollowCamFOV;
+                followCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = originalCamDistance;
                 stoppingTimer += CoroutineTimer + Time.deltaTime;
                 if (stoppingTimer >= StopDelay)
                 {
@@ -67,6 +70,7 @@ public class DistanceTracker : MonoBehaviour
         startX = transform.position.x;
         isTracking = true;
         followCam.m_Lens.FieldOfView = followCamZoomOutPOV;
+        followCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = zoomedOutCamDistance;
 
         StartCoroutine(Track());
     }
