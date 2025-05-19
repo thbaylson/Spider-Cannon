@@ -5,20 +5,29 @@ using System;
 
 public class SpiderLauncher : MonoBehaviour
 {
-    public float launchAngle = 0f;
     public bool launched = false;
 
     private Rigidbody rb;
-    [SerializeField] private BoxCollider colliderToTurnOff; // after launch, we wanna turn off the box collider.
     [SerializeField] private Rigidbody[] ragdollRbs;
     [SerializeField] private Collider[] ragdollColliders;
 
+    private ChargeBar chargeBar;
+    private AngleArrow angleArrow;
+
     public event Action OnLaunched;
+
+    private void Awake()
+    {
+        chargeBar = GetComponent<ChargeBar>();
+        OnLaunched += chargeBar.HandleLaunch;
+
+        angleArrow = GetComponent<AngleArrow>();
+        OnLaunched += angleArrow.HandleLaunch;
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        colliderToTurnOff = gameObject.GetComponent<BoxCollider>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
     }
@@ -29,11 +38,33 @@ public class SpiderLauncher : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        // Disable controls if the player is launched.
+        if (launched) return;
+
+        // Move the launch arrow up and down.
+        if (Input.GetKey(KeyCode.W))
+        {
+            angleArrow.MoveArrowUp();
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            angleArrow.MoveArrowDown();
+        }
+        angleArrow.UpdateArrowSprite(chargeBar.GetCurrentCharge());
+
+        // While the launch key is held down, charge the bar.
+        if (!launched && Input.GetKey(KeyCode.Space))
+        {
+            chargeBar.Charge();
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Launch(chargeBar.GetLaunchForce(), angleArrow.GetLaunchAngle());
+        }
     }
 
-    public void Launch(float launchForce)
+    private void Launch(float launchForce, float launchAngle)
     {
-        if (launched) return;
         launched = true;
 
         // Invoke subscriber event.

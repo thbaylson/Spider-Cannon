@@ -5,59 +5,56 @@ public class ChargeBar : MonoBehaviour
 {
     [SerializeField] private Image chargeBar;
     [SerializeField] private GameObject chargeBarParent;
-    public float CurrentCharge { get; private set; }
-    
-    public float minForce = 5f;
-    public float maxForce = 20f;
+
+    [SerializeField] private float minForce = 500f;
+    [SerializeField] private float maxForce = 2000f;
+    [SerializeField] private float chargeRate = 10f;
     private float maxCharge = 100f;
-    public float chargeRate = 10f;
-
-    private SpiderLauncher spiderLauncher;
-
-    void Awake()
-    {
-        spiderLauncher = GetComponent<SpiderLauncher>();
-        spiderLauncher.OnLaunched += HideUI;
-    }
+    private float currentCharge = 0;
 
     void Start()
     {
-        CurrentCharge = 0f;
+        currentCharge = 0f;
         UpdateChargeBar();
+    }
+
+    public void Charge()
+    {
+        currentCharge += chargeRate * Time.deltaTime;
+        // If the charge exceeds the max, reset it to 0.
+        currentCharge = currentCharge > maxCharge ? 0f : currentCharge;
+        UpdateChargeBar();
+    }
+
+    public float GetLaunchForce()
+    {
+        return Mathf.Lerp(minForce, maxForce, currentCharge / maxCharge);
+    }
+
+    public float GetCurrentCharge()
+    {
+        return currentCharge;
+    }
+
+    public void HandleLaunch()
+    {
+        currentCharge = 0f;
+        HideUI();
     }
 
     private void UpdateChargeBar()
     {
-        chargeBar.fillAmount = CurrentCharge / maxCharge;
+        chargeBar.fillAmount = currentCharge / maxCharge;
     }
 
-    void Update()
-    {
-        if (spiderLauncher.launched) return;
-
-        // While the launch key is held down, charge the bar.
-        if (Input.GetKey(KeyCode.Space))
-        {
-            CurrentCharge += chargeRate * Time.deltaTime;
-            // If the charge exceeds the max, reset it to 0.
-            CurrentCharge = CurrentCharge > maxCharge ? 0f : CurrentCharge;
-            UpdateChargeBar();
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            float launchForce = Mathf.Lerp(minForce, maxForce, CurrentCharge / maxCharge);
-            spiderLauncher.Launch(launchForce);
-        }
-    }
-
-    public void HideUI()
+    private void HideUI()
     {
         chargeBarParent.SetActive(false);
     }
 
-    public void ShowUI()
+    private void ShowUI()
     {
-        CurrentCharge = 0f;
+        currentCharge = 0f;
         UpdateChargeBar();
         chargeBarParent.SetActive(true);
     }
