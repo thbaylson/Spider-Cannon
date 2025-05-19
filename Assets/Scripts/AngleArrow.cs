@@ -45,7 +45,7 @@ public class AngleArrow : MonoBehaviour
         arrowPivot.gameObject.SetActive(false);
     }
 
-    private void ShowUI()
+    public void ShowUI()
     {
         arrowPivot.gameObject.SetActive(true);
     }

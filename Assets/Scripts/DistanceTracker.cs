@@ -6,7 +6,7 @@ using UnityEngine;
 public class DistanceTracker : MonoBehaviour
 {
     [SerializeField] private float StopSpeed = 0.01f;
-    [SerializeField] private float DistanceTraveled = 0f;
+    [SerializeField] public float DistanceTraveled { get; private set; } = 0f;
 
     // We need a stop delay or else we will end the run on the first frame after we start tracking.
     [SerializeField] private float StopDelay = 1f;
@@ -23,8 +23,7 @@ public class DistanceTracker : MonoBehaviour
     private float startX;
     private bool isTracking = false;
 
-    public event Action<float> OnDistanceChanged;
-    public event Action<float> OnRunEnded;
+    public event Action OnStopped;
 
     private SpiderLauncher _spiderLauncher;    
 
@@ -35,6 +34,11 @@ public class DistanceTracker : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        startX = transform.position.x;
+    }
+
     private IEnumerator Track()
     {
         // Small buffer to make sure we're moving before we check velocity.
@@ -43,7 +47,6 @@ public class DistanceTracker : MonoBehaviour
         while (isTracking)
         {
             DistanceTraveled = transform.position.x - startX;
-            OnDistanceChanged?.Invoke(DistanceTraveled);
 
             if (rb.velocity.magnitude < StopSpeed)
             {
@@ -57,7 +60,7 @@ public class DistanceTracker : MonoBehaviour
                 if (stoppingTimer >= StopDelay)
                 {
                     isTracking = false;
-                    OnRunEnded?.Invoke(DistanceTraveled);
+                    OnStopped?.Invoke();
                 }
             }
 
@@ -67,7 +70,6 @@ public class DistanceTracker : MonoBehaviour
 
     public void StartTracking()
     {
-        startX = transform.position.x;
         isTracking = true;
         followCam.m_Lens.FieldOfView = followCamZoomOutPOV;
         followCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = zoomedOutCamDistance;

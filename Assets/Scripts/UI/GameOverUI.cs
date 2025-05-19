@@ -7,11 +7,11 @@ public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMP_Text gameOverText;
-    [SerializeField] private DistanceTracker distanceTracker;
+    [SerializeField] private SpiderLauncher player;
 
     private void Awake()
     {
-        distanceTracker.OnRunEnded += Show;
+        player.OnRunEnded += Show;
         gameOverPanel.SetActive(false);
     }
 
@@ -24,7 +24,6 @@ public class GameOverUI : MonoBehaviour
 
     public void RestartButton()
     {
-        distanceTracker.OnRunEnded -= Show;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -21,6 +21,13 @@ public class Sticky : MonoBehaviour
         }
         PlaySquishSound();
         col.gameObject.GetComponentInChildren<SpiderImpactAudio>().PlayCamShake();
+
+        // Take away all remaining jumps
+        var spiderLauncher = col.gameObject.GetComponent<SpiderLauncher>();
+        if (spiderLauncher != null)
+        {
+            spiderLauncher.ConsumeAllJumps();
+        }
     }
     void PlaySquishSound()
     {

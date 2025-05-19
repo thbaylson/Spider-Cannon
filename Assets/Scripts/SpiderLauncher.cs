@@ -1,11 +1,13 @@
-using UnityEngine;
-using Cinemachine;
-using UnityEngine.SceneManagement;
 using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpiderLauncher : MonoBehaviour
 {
     public bool launched = false;
+    public int JumpsLeft = 3;
+    [SerializeField] TMP_Text jumpsLeftText;
 
     private Rigidbody rb;
     [SerializeField] private Rigidbody[] ragdollRbs;
@@ -13,11 +15,14 @@ public class SpiderLauncher : MonoBehaviour
 
     private ChargeBar chargeBar;
     private AngleArrow angleArrow;
+    private DistanceTracker distanceTracker;
 
     public AudioClip yeetClip;
     public float yeetPitch;
     public AudioSource audioSource;
+
     public event Action OnLaunched;
+    public event Action<float> OnRunEnded;
 
     private void Awake()
     {
@@ -26,6 +31,32 @@ public class SpiderLauncher : MonoBehaviour
 
         angleArrow = GetComponent<AngleArrow>();
         OnLaunched += angleArrow.HandleLaunch;
+
+        distanceTracker = GetComponent<DistanceTracker>();
+        distanceTracker.OnStopped += HandleStopped;
+
+        UpdateJumpsLeftText();
+    }
+
+    private void HandleStopped()
+    {
+        if (JumpsLeft <= 0)
+        {
+            OnRunEnded?.Invoke(distanceTracker.DistanceTraveled);
+        }
+        else
+        {
+            // Reset the spider
+            launched = false;
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            ToggleRagdoll(false);
+
+            chargeBar.ShowUI();
+            angleArrow.ShowUI();
+        }
     }
 
     void Start()
@@ -33,8 +64,7 @@ public class SpiderLauncher : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
-        audioSource = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();
-        
+        audioSource = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();        
     }
 
     void Update()
@@ -71,6 +101,8 @@ public class SpiderLauncher : MonoBehaviour
     private void Launch(float launchForce, float launchAngle)
     {
         launched = true;
+        JumpsLeft--;
+        UpdateJumpsLeftText();
 
         // Invoke subscriber event.
         OnLaunched?.Invoke();
@@ -82,24 +114,35 @@ public class SpiderLauncher : MonoBehaviour
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
         YeetUponLaunch();
         // Ragdoll.
-        TurnOnRagdoll();
+        ToggleRagdoll(true);
     }
 
-    private void TurnOnRagdoll()
+    private void ToggleRagdoll(bool toggleOn)
     {
         foreach (var rb in ragdollRbs)
         {
-            rb.isKinematic = false;
-            rb.detectCollisions = true;
+            rb.isKinematic = !toggleOn;
+            rb.detectCollisions = toggleOn;
         }
         foreach (var col in ragdollColliders)
         {
-            col.enabled = true;
+            col.enabled = toggleOn;
         }
     }
     public void YeetUponLaunch()
     {
         audioSource.pitch = yeetPitch;
         audioSource.PlayOneShot(yeetClip, 1);
+    }
+
+    public void ConsumeAllJumps()
+    {
+        JumpsLeft = 0;
+        UpdateJumpsLeftText();
+    }
+
+    private void UpdateJumpsLeftText()
+    {
+        jumpsLeftText.text = $"Jumps Left: {JumpsLeft}";
     }
 }

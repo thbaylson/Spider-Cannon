@@ -52,7 +52,7 @@ public class ChargeBar : MonoBehaviour
         chargeBarParent.SetActive(false);
     }
 
-    private void ShowUI()
+    public void ShowUI()
     {
         currentCharge = 0f;
         UpdateChargeBar();
