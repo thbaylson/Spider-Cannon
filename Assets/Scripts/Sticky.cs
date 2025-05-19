@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Sticky : MonoBehaviour
 {
+    public AudioSource audioSFX;
+    public AudioClip squishSound;
+    private void Start()
+    {
+        audioSFX = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider col)
     {
         var comp = col.gameObject.GetComponentsInChildren<Rigidbody>();
@@ -13,5 +19,12 @@ public class Sticky : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+        PlaySquishSound();
+        col.gameObject.GetComponentInChildren<SpiderImpactAudio>().PlayCamShake();
+    }
+    void PlaySquishSound()
+    {
+        audioSFX.pitch = 1;
+        audioSFX.PlayOneShot(squishSound, .5f);
     }
 }

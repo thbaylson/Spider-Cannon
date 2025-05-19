@@ -222,6 +222,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -116.167
       objectReference: {fileID: 0}
+    - target: {fileID: 7957277164479192607, guid: 32ef48e7476736e47abbe19e6b8a701c,
+        type: 3}
+      propertyPath: squishSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f31dfa0ece080740ad1c9b2c9c7ca5a, type: 3}
     - target: {fileID: 8436320650724782661, guid: 32ef48e7476736e47abbe19e6b8a701c,
         type: 3}
       propertyPath: m_Enabled
@@ -316,6 +321,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -88.482
       objectReference: {fileID: 0}
+    - target: {fileID: 7957277164479192607, guid: 32ef48e7476736e47abbe19e6b8a701c,
+        type: 3}
+      propertyPath: squishSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f31dfa0ece080740ad1c9b2c9c7ca5a, type: 3}
     - target: {fileID: 8436320650724782661, guid: 32ef48e7476736e47abbe19e6b8a701c,
         type: 3}
       propertyPath: m_Enabled
@@ -410,6 +420,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3.357
       objectReference: {fileID: 0}
+    - target: {fileID: 7957277164479192607, guid: 32ef48e7476736e47abbe19e6b8a701c,
+        type: 3}
+      propertyPath: squishSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f31dfa0ece080740ad1c9b2c9c7ca5a, type: 3}
     - target: {fileID: 8436320650724782661, guid: 32ef48e7476736e47abbe19e6b8a701c,
         type: 3}
       propertyPath: m_Enabled
