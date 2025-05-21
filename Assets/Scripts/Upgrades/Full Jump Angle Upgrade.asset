@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c93d0cc83a43dd49b2f8504a29d19f0, type: 3}
   m_Name: Full Jump Angle Upgrade
   m_EditorClassIdentifier: 
-  Name: Full Jump Angle
-  Description: You can now angle your jumps from 0 to 180 degrees!
-  Cost: 50
+  <Name>k__BackingField: Full Jump Angle
+  <Description>k__BackingField: You can now angle your jumps from 0 to 180 degrees!
+  <Cost>k__BackingField: 500
+  <MaxStack>k__BackingField: 1

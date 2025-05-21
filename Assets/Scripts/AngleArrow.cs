@@ -40,6 +40,11 @@ public class AngleArrow : MonoBehaviour
         HideUI();
     }
 
+    public void SetMaxAngle(float angle)
+    {
+        maxAngle = angle;
+    }
+
     private void HideUI()
     {
         arrowPivot.gameObject.SetActive(false);

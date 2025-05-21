@@ -1,14 +1,10 @@
-using System;
 using UnityEngine;
 
-public class Upgrade : ScriptableObject
+public abstract class Upgrade : ScriptableObject
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Cost { get; set; }
-}
-
- public interface IUpgrade
-{
-    public void Apply();
+    [field: SerializeField] public string Name { get; set; }
+    [field: SerializeField] public string Description { get; set; }
+    [field: SerializeField] public int Cost { get; set; }
+    [field: SerializeField] public int MaxStack { get; set; }
+    public abstract void Apply(SpiderLauncher spiderLauncher);
 }

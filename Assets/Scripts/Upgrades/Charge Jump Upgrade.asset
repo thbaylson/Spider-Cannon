@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f07f5cc4472da4a8143080a7c5cbf2, type: 3}
   m_Name: Charge Jump Upgrade
   m_EditorClassIdentifier: 
-  Name: Charge Jump
-  Description: You can now charge your jumps!
-  Cost: 10
+  <Name>k__BackingField: Charge Jump
+  <Description>k__BackingField: You can now charge your jumps!
+  <Cost>k__BackingField: 500
+  <MaxStack>k__BackingField: 1

@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SpiderLauncher : MonoBehaviour
 {
@@ -131,6 +130,13 @@ public class SpiderLauncher : MonoBehaviour
     {
         audioSource.pitch = yeetPitch;
         audioSource.PlayOneShot(yeetClip, 1);
+    }
+
+    public void IncreaseMaxJumps(int amount)
+    {
+        MaxJumps += Mathf.Max(0, amount);
+        JumpsLeft += Mathf.Max(0, amount);
+        UpdateJumpsLeftText();
     }
 
     public void ConsumeAllJumps()

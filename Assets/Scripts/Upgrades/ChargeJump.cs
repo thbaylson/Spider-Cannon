@@ -1,14 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Charge Jump Upgrade", menuName = "Spider Upgrades/Charge Jump")]
-public class ChargeJump : Upgrade, IUpgrade
+public class ChargeJump : Upgrade
 {
-    public new string Name = "Charge Jump";
-    public new string Description = "You can now charge your jumps!";
-    public new int Cost = 10;
-
-    public void Apply()
+    public override void Apply(SpiderLauncher spiderLauncher)
     {
-        Debug.Log("Charge Jump Upgrade Applied");
+        spiderLauncher.canCharge = true;
     }
 }
