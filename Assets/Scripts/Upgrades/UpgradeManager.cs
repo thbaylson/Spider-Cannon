@@ -5,40 +5,17 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public static UpgradeManager Instance { get; private set; }
-
+    [SerializeField] private SpiderLauncher spiderLauncher;
     [SerializeField] private UpgradeDatabase upgradeDB;
+    [SerializeField] private TMP_Text goldAmountText;
 
-    public int gold = 0;
-    public HashSet<Upgrade> ownedUpgrades = new();
-    
-    private SpiderLauncher spiderLauncher;
-    private TMP_Text goldAmountText;
-
-    void Awake()
-    {
-        if (Instance != null) { Destroy(gameObject); return; }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);        
-    }
+    private int gold = 0;
+    private HashSet<Upgrade> ownedUpgrades = new();
 
     private void Start()
     {
-        spiderLauncher = FindFirstObjectByType<SpiderLauncher>();
-        if (spiderLauncher == null)
-        {
-            Debug.LogError("SpiderLauncher not found in the scene.");
-            return;
-        }
-        else
-        {
-            Debug.Log("SpiderLauncher found in the scene.");
-        }
-
         spiderLauncher.OnRunEnded += HandleRunEnded;
 
-        goldAmountText = GameObject.Find("GoldAmountText").GetComponent<TMP_Text>();
         SaveGame.Load(out gold, out ownedUpgrades);
         UpdateGoldAmountText();
     }
@@ -60,7 +37,15 @@ public class UpgradeManager : MonoBehaviour
 
     public void AddGold(int amount)
     {
-        gold += amount;
+        // Never add negative gold.
+        gold += Mathf.Max(0, amount);
+        UpdateGoldAmountText();
+        SaveGame.Save(gold, ownedUpgrades);
+    }
+
+    public void SetGold(int amount)
+    {
+        gold = amount;
         UpdateGoldAmountText();
         SaveGame.Save(gold, ownedUpgrades);
     }
@@ -76,6 +61,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void HandleRunEnded(float distanceTraveled)
     {
-        gold += (int)distanceTraveled;
+        AddGold((int)distanceTraveled);
     }
 }

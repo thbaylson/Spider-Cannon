@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Extra Jumps Upgrade", menuName = "Spider Upgrades/Extra Jump")]

@@ -48,6 +48,7 @@ public class DistanceTracker : MonoBehaviour
         {
             DistanceTraveled = transform.position.x - startX;
 
+            // TODO: What if we used a raycast to determine how far we are from the ground?
             if (rb.velocity.magnitude < StopSpeed)
             {
                 // Once we start stopping, we want to stop the player from moving.

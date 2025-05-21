@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class SpiderLauncher : MonoBehaviour
 {
     public bool launched = false;
-    public int JumpsLeft = 3;
+    public int JumpsLeft = 1;
+    public int MaxJumps = 1;
     [SerializeField] TMP_Text jumpsLeftText;
+    public bool canCharge = false;
 
     private Rigidbody rb;
     [SerializeField] private Rigidbody[] ragdollRbs;
@@ -69,10 +71,6 @@ public class SpiderLauncher : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
         // Disable controls if the player is launched.
         if (launched) return;
 
@@ -88,7 +86,7 @@ public class SpiderLauncher : MonoBehaviour
         angleArrow.UpdateArrowSprite(chargeBar.GetCurrentCharge());
 
         // While the launch key is held down, charge the bar.
-        if (!launched && Input.GetKey(KeyCode.Space))
+        if (!launched && canCharge && Input.GetKey(KeyCode.Space))
         {
             chargeBar.Charge();
         }
@@ -143,6 +141,6 @@ public class SpiderLauncher : MonoBehaviour
 
     private void UpdateJumpsLeftText()
     {
-        jumpsLeftText.text = $"Jumps Left: {JumpsLeft}";
+        jumpsLeftText.text = $"Jumps Left: {JumpsLeft}/{MaxJumps}";
     }
 }
