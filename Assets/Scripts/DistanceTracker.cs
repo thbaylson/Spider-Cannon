@@ -18,12 +18,13 @@ public class DistanceTracker : MonoBehaviour
     [SerializeField] public float originalCamDistance;
     [SerializeField] private float zoomedOutCamDistance;
     [SerializeField] private float followCamZoomOutPOV;
+    [SerializeField] public bool reachedFinish=false;
 
     private Rigidbody rb;
     private float startX;
     private bool isTracking = false;
 
-    public event Action OnStopped;
+    public event Action<bool> OnStopped;
 
     private SpiderLauncher _spiderLauncher;    
 
@@ -53,7 +54,8 @@ public class DistanceTracker : MonoBehaviour
             {
                 // Once we start stopping, we want to stop the player from moving.
                 // Except this doesn't actually work the way I thought it would...
-                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;
+                // rb.velocity = Vector3.zero;
 
                 followCam.m_Lens.FieldOfView = originalFollowCamFOV;
                 followCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = originalCamDistance;
@@ -61,7 +63,7 @@ public class DistanceTracker : MonoBehaviour
                 if (stoppingTimer >= StopDelay)
                 {
                     isTracking = false;
-                    OnStopped?.Invoke();
+                    OnStopped?.Invoke(reachedFinish);
                 }
             }
 

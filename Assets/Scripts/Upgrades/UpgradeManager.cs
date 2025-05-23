@@ -75,7 +75,7 @@ public class UpgradeManager : MonoBehaviour
         OnGoldChanged?.Invoke(gold);
     }
 
-    private void HandleRunEnded(float distanceTraveled)
+    private void HandleRunEnded(float distanceTraveled,bool reachedFinished)
     {
         AddGold((int)distanceTraveled);
     }

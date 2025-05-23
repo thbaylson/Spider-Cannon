@@ -23,7 +23,7 @@ public class SpiderLauncher : MonoBehaviour
     public AudioSource audioSource;
 
     public event Action OnLaunched;
-    public event Action<float> OnRunEnded;
+    public event Action<float,bool> OnRunEnded;
 
     private void Awake()
     {
@@ -39,19 +39,19 @@ public class SpiderLauncher : MonoBehaviour
         UpdateJumpsLeftText();
     }
 
-    private void HandleStopped()
+    private void HandleStopped(bool reachedFinished)
     {
-        if (JumpsLeft <= 0)
+        if (JumpsLeft <= 0||reachedFinished)
         {
-            OnRunEnded?.Invoke(distanceTracker.DistanceTraveled);
+            OnRunEnded?.Invoke(distanceTracker.DistanceTraveled,reachedFinished);
         }
         else
         {
             // Reset the spider
             launched = false;
 
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            //rb.velocity = Vector3.zero;
+            //rb.angularVelocity = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             ToggleRagdoll(false);
 
