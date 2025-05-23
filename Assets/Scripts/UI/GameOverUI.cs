@@ -33,10 +33,10 @@ public class GameOverUI : MonoBehaviour
         if (reachedFinish)
         {
             gameOverPanel.SetActive(true);
-            StartCoroutine(LeaderboardShit());
             leaderBoardPanel.SetActive(true);
             timeTextObject.SetActive(true);
             timeText.text = "Time:\n " + ConvertGameTimeToString();
+            StartCoroutine(LeaderboardShit());
 
         }
         
