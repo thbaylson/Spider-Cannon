@@ -24,7 +24,7 @@ public class AngleArrow : MonoBehaviour
     public void UpdateArrowSprite(float chargeAmount)
     {
         float scale = Mathf.InverseLerp(0f, 100f, chargeAmount);
-        arrowSprite.localScale = new Vector3(0.5f + scale * 1.5f, 1f, 1f);
+        arrowSprite.localScale = new Vector3(0.5f + scale * 1.5f, 1f, .5f);
 
         arrowPivot.localEulerAngles = new Vector3(0, 0, currentAngle);
     }

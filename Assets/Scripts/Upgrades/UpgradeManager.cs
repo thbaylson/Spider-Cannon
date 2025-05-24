@@ -71,7 +71,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void UpdateGoldAmountText()
     {
-        goldAmountText.text = $"Gold: {gold}";
+        goldAmountText.text = $" {gold}";
         OnGoldChanged?.Invoke(gold);
     }
 

@@ -148,6 +148,6 @@ public class SpiderLauncher : MonoBehaviour
 
     private void UpdateJumpsLeftText()
     {
-        jumpsLeftText.text = $"Jumps Left: {JumpsLeft}/{MaxJumps}";
+        jumpsLeftText.text = $" {JumpsLeft}/{MaxJumps}";
     }
 }
