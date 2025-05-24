@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb22b7f9284e43d4990933436c2f6bda, type: 3}
-  m_Name: TestDB
+  m_Script: {fileID: 11500000, guid: c7fd826174b63e7419c39362e7cd927f, type: 3}
+  m_Name: Launch Info Upgrade
   m_EditorClassIdentifier: 
-  upgrades:
-  - {fileID: 11400000, guid: 5f5a03db71ffbf44b8ffea2258020f60, type: 2}
+  <Name>k__BackingField: Launch Info
+  <Description>k__BackingField: Displays launch angle and force information.
+  <Cost>k__BackingField: 999
+  <MaxStack>k__BackingField: 1

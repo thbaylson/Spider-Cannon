@@ -1,12 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoreUI : MonoBehaviour
 {
     [SerializeField] private UpgradeManager upgradeManager;
     [SerializeField] private StoreItemUI itemPrefab;
     [SerializeField] private Transform content;
-    [SerializeField] private int numItems = 1;
+    [SerializeField] private ScrollRect scrollViewRect;
 
     private List<StoreItemUI> displayedItems = new();
 
@@ -14,6 +16,7 @@ public class StoreUI : MonoBehaviour
     {
         Populate();
         upgradeManager.OnGoldChanged += RefreshAll;
+        StartCoroutine(ForceLayoutRefresh());
     }
 
     void OnDisable()
@@ -26,12 +29,14 @@ public class StoreUI : MonoBehaviour
     {
         Clear();
         UpgradeDatabase upgradeDB = upgradeManager.UpgradeDB;
-        foreach (Upgrade upgrade in upgradeDB.GetRandomNext(numItems))
+        foreach (Upgrade upgrade in upgradeDB.upgrades)
         {
             StoreItemUI ui = Instantiate(itemPrefab, content);
             ui.Show(upgrade, upgradeManager);
             displayedItems.Add(ui);
         }
+
+        StartCoroutine(ForceLayoutRefresh());
     }
 
     private void RefreshAll(int _)
@@ -49,5 +54,17 @@ public class StoreUI : MonoBehaviour
             Destroy(item.gameObject);
         }
         displayedItems.Clear();
+    }
+
+    // Force a layout refresh to ensure the scroll view is updated correctly. Populating a
+    //  ScrollView at runtime can sometimes cause issues.
+    private IEnumerator ForceLayoutRefresh()
+    {
+        yield return null;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)content);
+        Canvas.ForceUpdateCanvases();
+
+        scrollViewRect.verticalNormalizedPosition = 1f;
     }
 }

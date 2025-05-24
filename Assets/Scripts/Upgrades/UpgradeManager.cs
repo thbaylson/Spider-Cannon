@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void SetUpgrades(List<Upgrade> upgrades)
     {
-        ownedUpgrades = upgrades;
+        ownedUpgrades = new(upgrades);
         SaveGame.Save(gold, ownedUpgrades);
     }
 
@@ -78,5 +78,10 @@ public class UpgradeManager : MonoBehaviour
     private void HandleRunEnded(float distanceTraveled,bool reachedFinished)
     {
         AddGold((int)distanceTraveled);
+    }
+
+    public void UnlockAllUpgrades()
+    {
+        SetUpgrades(upgradeDB.upgrades);
     }
 }

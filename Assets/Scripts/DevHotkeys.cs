@@ -30,6 +30,10 @@ public class DevHotkeys : MonoBehaviour
         }
 
         // UPGRADES
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            upgradeManager.UnlockAllUpgrades();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             upgradeManager.SetUpgrades(new());

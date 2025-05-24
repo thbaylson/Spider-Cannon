@@ -42,6 +42,16 @@ public class ChargeBar : MonoBehaviour
         HideUI();
     }
 
+    public void SetMaxLaunchForce(float amount)
+    {
+        maxForce = amount;
+    }
+
+    public void SetChargeRate(float rate)
+    {
+        chargeRate = rate;
+    }
+
     private void UpdateChargeBar()
     {
         chargeBar.fillAmount = currentCharge / maxCharge;

@@ -9,6 +9,7 @@ public class SpiderLauncher : MonoBehaviour
     public int MaxJumps = 1;
     [SerializeField] TMP_Text jumpsLeftText;
     public bool canCharge = false;
+    public bool showLaunchInfo = false;
 
     private Rigidbody rb;
     [SerializeField] private Rigidbody[] ragdollRbs;
