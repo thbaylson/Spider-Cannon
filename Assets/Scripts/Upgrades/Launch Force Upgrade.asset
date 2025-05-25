@@ -16,4 +16,4 @@ MonoBehaviour:
   <Description>k__BackingField: Increase launch force maximum.
   <Cost>k__BackingField: 10000
   <MaxStack>k__BackingField: 1
-  newLaunchForce: 3000
+  newLaunchForce: 2000
