@@ -14,7 +14,7 @@ public class WinCondition : MonoBehaviour
             Rigidbody[] rbList= other.gameObject.GetComponentsInChildren<Rigidbody>();
             foreach (var rb in rbList)
             {
-                rb.isKinematic = true;
+                rb.drag = 500;
             }
         }
     }

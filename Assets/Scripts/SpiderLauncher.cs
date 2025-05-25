@@ -25,6 +25,9 @@ public class SpiderLauncher : MonoBehaviour
 
     public event Action OnLaunched;
     public event Action<float,bool> OnRunEnded;
+    
+    [SerializeField] private TextMeshProUGUI launchForceText;
+    [SerializeField]  private TextMeshProUGUI launchAngleText;
 
     private void Awake()
     {
@@ -66,7 +69,9 @@ public class SpiderLauncher : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ragdollRbs = GetComponentsInChildren<Rigidbody>();
         ragdollColliders = GetComponentsInChildren<Collider>();
-        audioSource = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();        
+        audioSource = GameObject.FindWithTag("SFX").GetComponent<AudioSource>();
+        
+        
     }
 
     void Update()
@@ -110,6 +115,8 @@ public class SpiderLauncher : MonoBehaviour
         Vector2 direction = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
         rb.isKinematic = false;
         rb.AddForce(direction * launchForce, ForceMode.Impulse);
+        launchForceText.SetText("Launch Force: "+launchForce);
+        launchAngleText.SetText("Launch Angle: "+launchAngle);
         YeetUponLaunch();
         // Ragdoll.
         ToggleRagdoll(true);

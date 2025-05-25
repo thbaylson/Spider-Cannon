@@ -26,7 +26,7 @@ public class GameOverUI : MonoBehaviour
         leaderBoardPanel.SetActive(false);
     }
 
-    private void Show(float distance, bool reachedFinish)
+    public void Show(float distance, bool reachedFinish)
     {
         
         gameOverText.text = $"GAME OVER\nDistance Traveled: {Math.Round(distance, 1)}cm!";
@@ -35,7 +35,7 @@ public class GameOverUI : MonoBehaviour
             gameOverPanel.SetActive(true);
             leaderBoardPanel.SetActive(true);
             timeTextObject.SetActive(true);
-            timeText.text = "Time:\n " + ConvertGameTimeToString();
+            timeText.text = "Time: " + ConvertGameTimeToString();
             StartCoroutine(LeaderboardShit());
 
         }
